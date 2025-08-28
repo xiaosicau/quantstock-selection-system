@@ -1,0 +1,219 @@
+# 量化股票选股系统配置文件
+
+# 系统配置
+system:
+  name: "QuantStock Selection System"
+  version: "1.0.0"
+  debug: false
+  log_level: "INFO"
+
+# 数据源配置
+data_sources:
+  tushare:
+    enabled: true
+    token: "your_tushare_token_here"
+    timeout: 30
+    retry_count: 3
+  
+  akshare:
+    enabled: true
+    timeout: 60
+    retry_count: 3
+  
+  wind:
+    enabled: false
+    username: "your_wind_username"
+    password: "your_wind_password"
+
+# 数据存储配置
+database:
+  type: "sqlite"  # sqlite, mysql, postgresql
+  sqlite:
+    path: "data/quantstock.db"
+  
+  mysql:
+    host: "localhost"
+    port: 3306
+    database: "quantstock"
+    username: "root"
+    password: "password"
+  
+  postgresql:
+    host: "localhost"
+    port: 5432
+    database: "quantstock"
+    username: "postgres"
+    password: "password"
+
+# 回测配置
+backtest:
+  initial_capital: 1000000  # 初始资金
+  commission_rate: 0.0003   # 佣金费率
+  slippage_rate: 0.0001      # 滑点费率
+  min_commission: 5         # 最低佣金
+  
+  # 风险控制
+  risk_control:
+    max_position_size: 0.1   # 单只股票最大仓位
+    max_sector_weight: 0.3   # 单个行业最大权重
+    stop_loss: 0.08         # 止损比例
+    take_profit: 0.15       # 止盈比例
+    max_drawdown: 0.2       # 最大回撤限制
+
+# 因子配置
+factors:
+  # 价值因子
+  value:
+    enabled: true
+    weight: 0.25
+    parameters:
+      pe_ratio: true
+      pb_ratio: true
+      ps_ratio: false
+  
+  # 动量因子
+  momentum:
+    enabled: true
+    weight: 0.2
+    parameters:
+      lookback_period: 252
+      skip_period: 21
+  
+  # 质量因子
+  quality:
+    enabled: true
+    weight: 0.2
+    parameters:
+      roe: true
+      roa: true
+      gross_margin: true
+      debt_ratio: true
+  
+  # 规模因子
+  size:
+    enabled: true
+    weight: 0.15
+    parameters:
+      market_cap: true
+  
+  # 波动率因子
+  volatility:
+    enabled: true
+    weight: 0.2
+    parameters:
+      window: 252
+      frequency: "daily"
+
+# 选股配置
+stock_selection:
+  # 股票池
+  universe:
+    markets: ["A股", "港股", "美股"]
+    min_market_cap: 50  # 最小市值（亿）
+    min_listing_days: 252  # 最小上市天数
+  
+  # 筛选条件
+  filters:
+    pe_ratio_max: 50
+    pb_ratio_max: 10
+    roe_min: 5
+    debt_ratio_max: 0.7
+    price_min: 2
+    turnover_min: 1000000  # 最小成交额
+  
+  # 排名设置
+  ranking:
+    top_n: 50  # 选出前50只股票
+    rebalance_frequency: "monthly"  # 调仓频率
+    weight_method: "equal_weight"  # 权重方法: equal_weight, market_cap_weight, risk_parity
+
+# 交易配置
+trading:
+  # 交易时间
+  market_hours:
+    open: "09:30"
+    close: "15:00"
+    timezone: "Asia/Shanghai"
+  
+  # 交易限制
+  limits:
+    max_daily_trades: 100
+    max_turnover_rate: 0.1
+    min_order_interval: 1  # 最小下单间隔（秒）
+
+# 通知配置
+notifications:
+  email:
+    enabled: false
+    smtp_server: "smtp.gmail.com"
+    smtp_port: 587
+    username: "your_email@gmail.com"
+    password: "your_password"
+    recipients: ["recipient@example.com"]
+  
+  wechat:
+    enabled: false
+    webhook_url: "your_wechat_webhook_url"
+  
+  dingtalk:
+    enabled: false
+    webhook_url: "your_dingtalk_webhook_url"
+
+# 日志配置
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file:
+    enabled: true
+    path: "logs/quantstock.log"
+    max_size: "100MB"
+    backup_count: 5
+  console:
+    enabled: true
+
+# Web界面配置
+web_interface:
+  host: "0.0.0.0"
+  port: 8501
+  debug: false
+  theme:
+    primary_color: "#1f77b4"
+    secondary_color: "#ff7f0e"
+    background_color: "#f8f9fa"
+  
+  # 图表配置
+  charts:
+    default_height: 400
+    interactive: true
+    theme: "plotly"
+
+# 性能优化
+performance:
+  # 缓存配置
+  cache:
+    enabled: true
+    ttl: 3600  # 缓存时间（秒）
+    max_size: "1GB"
+  
+  # 并行处理
+  parallel:
+    enabled: true
+    max_workers: 4
+  
+  # 数据预加载
+  preload:
+    enabled: true
+    stocks: ["000001.SZ", "000002.SZ", "600519.SH"]
+    factors: ["pe_ratio", "pb_ratio", "roe"]
+
+# 部署配置
+deployment:
+  environment: "development"  # development, staging, production
+  docker:
+    enabled: false
+    image: "quantstock:latest"
+    ports:
+      - "8501:8501"
+    volumes:
+      - "./data:/app/data"
+      - "./logs:/app/logs"
