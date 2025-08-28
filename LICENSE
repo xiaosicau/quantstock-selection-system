@@ -1,0 +1,43 @@
+MIT License
+
+Copyright (c) 2024 量化分析团队
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+## 中文说明
+
+本软件采用MIT许可证，允许：
+- ✅ 商业使用
+- ✅ 修改和分发
+- ✅ 私人使用
+- ✅ 专利使用
+
+### 使用条款
+1. 本软件按"原样"提供，不提供任何明示或暗示的保证
+2. 使用本软件产生的投资风险由用户自行承担
+3. 金融投资建议仅供参考，不构成投资建议
+4. 请在使用前充分了解量化投资的风险
+
+### 免责声明
+本软件提供的股票分析和投资建议仅供参考，不构成投资建议。用户应根据自身情况独立判断，并承担相应投资风险。开发者不对因使用本软件产生的任何损失承担责任。
+
+### 技术支持
+- GitHub: https://github.com/xiaosicau/quantstock-selection-system
+- 邮箱: support@quantstock.com
+- 技术社区: 欢迎提交Issue和Pull Request
