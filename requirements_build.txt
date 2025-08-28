@@ -1,0 +1,41 @@
+# 构建依赖 - 用于打包应用
+
+# 核心打包工具
+pyinstaller>=5.13.0
+
+# 安装程序创建
+setuptools>=68.0.0
+wheel>=0.41.0
+
+# 代码打包
+build>=0.10.0
+
+# 安装器创建工具
+# Windows: Inno Setup (外部工具)
+# macOS: 使用内置工具
+# Linux: 使用shell脚本
+
+# 可选：创建Windows安装程序
+# py2exe>=0.11.0  # Windows专用
+
+# 可选：创建macOS应用包
+# py2app>=0.28.0  # macOS专用
+
+# 依赖管理
+pip-tools>=7.0.0
+
+# 版本管理
+bump2version>=1.0.0
+
+# 代码质量检查
+black>=23.0.0
+isort>=5.12.0
+flake8>=6.0.0
+mypy>=1.5.0
+
+# 测试覆盖
+pytest-cov>=4.1.0
+
+# 文档生成
+sphinx>=7.0.0
+sphinx-rtd-theme>=1.3.0
