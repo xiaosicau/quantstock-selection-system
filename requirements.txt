@@ -1,0 +1,67 @@
+# 量化股票选股系统依赖包
+# 基于多因子模型的量化交易系统
+
+# 数据处理核心库
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# 机器学习库
+scikit-learn>=1.3.0
+xgboost>=2.0.0
+lightgbm>=4.0.0
+
+# 数据获取与接口
+akshare>=1.10.0
+tushare>=1.3.0
+yfinance>=0.2.0
+requests>=2.31.0
+beautifulsoup4>=4.12.0
+
+# 可视化与图表
+matplotlib>=3.7.0
+plotly>=5.15.0
+seaborn>=0.12.0
+streamlit>=1.28.0
+
+# Web框架与API
+fastapi>=0.104.0
+uvicorn>=0.24.0
+pydantic>=2.4.0
+
+# 数据库支持
+sqlalchemy>=2.0.0
+
+# 金融计算专用库
+empyrical>=0.5.5
+pyfolio-reloaded>=0.9.2
+
+# 技术指标计算
+ta>=0.10.2
+
+# 日期与时间处理
+python-dateutil>=2.8.2
+
+# 配置管理
+python-dotenv>=1.0.0
+pyyaml>=6.0.0
+
+# 日志与监控
+loguru>=0.7.0
+
+# 异步处理
+aiohttp>=3.8.0
+
+# 工具库
+joblib>=1.3.0
+tqdm>=4.66.0
+
+# 开发工具
+pytest>=7.4.0
+pytest-cov>=4.1.0
+black>=23.0.0
+flake8>=6.0.0
+
+# 性能优化
+numba>=0.58.0
+bottleneck>=1.3.0
