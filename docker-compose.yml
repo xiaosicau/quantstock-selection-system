@@ -1,0 +1,76 @@
+version: '3.8'
+
+services:
+  # 主应用服务
+  quantstock:
+    build: .
+    container_name: quantstock-app
+    ports:
+      - "8501:8501"  # Streamlit Web界面
+      - "5000:5000"  # REST API接口
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./config:/app/config
+      - ./cache:/app/cache
+    environment:
+      - PYTHONPATH=/app
+      - TUSHARE_TOKEN=${TUSHARE_TOKEN:-your_tushare_token}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+    restart: unless-stopped
+    depends_on:
+      - redis
+    networks:
+      - quantstock-network
+
+  # Redis缓存服务
+  redis:
+    image: redis:7-alpine
+    container_name: quantstock-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: unless-stopped
+    networks:
+      - quantstock-network
+
+  # PostgreSQL数据库（可选）
+  postgres:
+    image: postgres:15-alpine
+    container_name: quantstock-db
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=quantstock
+      - POSTGRES_USER=quantstock
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-quantstock123}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - quantstock-network
+
+  # Nginx反向代理（生产环境）
+  nginx:
+    image: nginx:alpine
+    container_name: quantstock-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - quantstock
+    restart: unless-stopped
+    networks:
+      - quantstock-network
+
+volumes:
+  redis_data:
+  postgres_data:
+
+networks:
+  quantstock-network:
+    driver: bridge
